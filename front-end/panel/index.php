@@ -242,14 +242,10 @@
         ?>
             </div>
         </div>
-        <script>       
-
-            <?php if($_COOKIE['permission'] == 'sindico' || $_COOKIE['permission'] == 'subsindico'){
-                echo('GetChangeUser()');
-            }?>
+        <script>    
             async function GetChangeUser(){
 
-               let response = await fetch('http://35.198.5.41:3000/resident/list', {
+               let response = await fetch('http://18.222.162.205:3000/user/list', {
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
@@ -295,7 +291,7 @@
                     cpf:userCpf,
                 })
 				
-               let response = await fetch('http://35.198.5.41:3000/resident/delete', {
+               let response = await fetch('http://18.222.162.205:3000/user/delete', {
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
@@ -314,29 +310,38 @@
 
                 let cpf = document.getElementById('changeUserCpf').value
                 let name = document.getElementById('changeUserName').value
-                let phone = document.getElementById('changeUserPhone').value
+                let telephone = document.getElementById('changeUserPhone').value
                 let houseNum = parseInt(document.getElementById('changeUserHouseNum').value)
                 let blockNum = parseInt(document.getElementById('changeUserBlockNum').value)
                 let password = document.getElementById('changeUserPass').value
                 let profile = document.getElementById('changeUserProfile').value
                 
                 if(profile == "zelador" || profile == "porteiro"){
-                    var url = 'http://35.198.5.41:3000/employee/new'
+                    var url = 'http://18.222.162.205:3000/employee'
                     var numSal = 1500.00;
                 }else{
-                    var url = 'http://35.198.5.41:3000/resident/new'
+                    var url = 'http://18.222.162.205:3000/resident'
                 }
-                const payload = JSON.stringify({
-                    name,
-                    password,
-                    cpf,
-                    telephone: phone,
-                    number: houseNum,
-                    block: blockNum,
-                    profile: profile,
-                    office: profile,
-                    salary: numSal,
-                })
+
+                let payload = { cpf }
+
+                if(password) payload = { ...payload, password }
+                if(name) payload = { ...payload, name }
+
+                let resident = {}
+                if(telephone) resident = { ...resident , telephone }
+                if(houseNum) resident = { ...resident , number: houseNum }
+                if(blockNum) resident = { ...resident , block: blockNum }
+                if(profile) resident = { ...resident , profile }
+
+                const employee = { office: profile, salary: numSal }
+
+                if(profile == "zelador" || profile == "porteiro") {
+                    payload = JSON.stringify({ ...payload, ...employee }) 
+                }else{
+                    payload = JSON.stringify({ ...payload, ...resident })
+                }
+
 				
                let response = await fetch(url, {
                     headers: {
@@ -372,7 +377,7 @@
                     })
                 }          
                 
-               let response = await fetch('http://35.198.5.41:3000/lost-and-found/new', {
+               let response = await fetch('http://18.222.162.205:3000/lost-and-found/', {
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
@@ -393,7 +398,7 @@
 
             async function GetLostAndFound(){
 
-               let response = await fetch('http://35.198.5.41:3000/lost-and-found/list', {
+               let response = await fetch('http://18.222.162.205:3000/lost-and-found/list', {
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
@@ -438,7 +443,7 @@
                     endReservation: end,
                 })
 
-               let response = await fetch('http://35.198.5.41:3000/salon/new', {
+               let response = await fetch('http://18.222.162.205:3000/salon/', {
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
@@ -454,7 +459,7 @@
             GetPartyRoom()
             async function GetPartyRoom(){
 
-               let response = await fetch('http://35.198.5.41:3000/salon/list', {
+               let response = await fetch('http://18.222.162.205:3000/salon/list', {
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
@@ -499,7 +504,7 @@
                     description,
                 })
 
-               let response = await fetch('http://35.198.5.41:3000/occurrence/new', {
+               let response = await fetch('http://18.222.162.205:3000/occurrence/', {
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
@@ -515,7 +520,7 @@
             GetRegisterTicket()
              async function GetRegisterTicket(){
 
-               let response = await fetch('http://35.198.5.41:3000/occurrence/list', {
+               let response = await fetch('http://18.222.162.205:3000/occurrence/list', {
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',

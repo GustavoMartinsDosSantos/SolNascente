@@ -32,7 +32,7 @@ session_start();
 
 				const payload = JSON.stringify({ cpf, password })
 
-				let response= await fetch('http://35.198.5.41:3000/resident/login', {
+				let response= await fetch('http://18.222.162.205:3000/auth', {
 				headers: {
 					'Accept': 'application/json',
 					'Content-Type': 'application/json'
@@ -46,8 +46,8 @@ session_start();
 					document.cookie = "id =" + response.id
 					document.cookie = "accessToken =" + response.token
 					document.cookie = "permission =" + response.profile;
-					//window.location = 'http://35.198.5.41/panel'
-					window.location = 'http://192.168.25.61:366/SolNascente/front-end/panel'
+					//window.location = 'http://18.222.162.205/panel'
+					window.location = 'http://18.222.162.205/panel'
 				}else{
 					alert("Senha ou CPF inválidos")
 				}
