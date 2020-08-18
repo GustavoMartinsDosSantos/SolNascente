@@ -76,9 +76,10 @@
                                     <label>Insira a permissão do usuário</label>
                                     <select id="changeUserProfile">
                                         <option>morador</option>
-                                        <option>zelador</option>
                                         <option>subsindico</option>
                                         <option>sindico</option>
+                                        <option>zelador</option>
+                                        <option>porteiro</option>
                                     </select>
                                 </div>
                                 <div class="modalInputDiv submitButton">
@@ -242,7 +243,11 @@
         ?>
             </div>
         </div>
-        <script>    
+        <script>
+            <?php if($_COOKIE['permission'] == 'sindico' || $_COOKIE['permission'] == 'subsindico'){	
+                echo('GetChangeUser();');	
+            }?>
+            
             async function GetChangeUser(){
 
                let response = await fetch('http://18.222.162.205:3000/user/list', {
@@ -306,8 +311,6 @@
             }
 
             async function ChangeUser(){
-
-
                 let cpf = document.getElementById('changeUserCpf').value
                 let name = document.getElementById('changeUserName').value
                 let telephone = document.getElementById('changeUserPhone').value
@@ -316,7 +319,7 @@
                 let password = document.getElementById('changeUserPass').value
                 let profile = document.getElementById('changeUserProfile').value
                 
-                if(profile == "zelador" || profile == "porteiro"){
+                if(profile == 'zelador' || profile == 'porteiro'){
                     var url = 'http://18.222.162.205:3000/employee'
                     var numSal = 1500.00;
                 }else{
@@ -377,11 +380,11 @@
                     })
                 }          
                 
-               let response = await fetch('http://18.222.162.205:3000/lost-and-found/', {
+               let response = await fetch('http://18.222.162.205:3000/lost-and-found/create', {
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
-                        'Authorization': 'Bearer  <?php echo($_COOKIE['accessToken'])?>'
+                        'Authorization': 'Bearer <?php echo($_COOKIE['accessToken'])?>'
                     },
                     method: 'post',
                     body: payload,
@@ -402,7 +405,7 @@
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
-                        'Authorization': 'Bearer  <?php echo($_COOKIE['accessToken'])?>'
+                        'Authorization': 'Bearer <?php echo($_COOKIE['accessToken'])?>'
                     },
                     method: 'get',
                 })
@@ -447,7 +450,7 @@
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
-                        'Authorization': 'Bearer  <?php echo($_COOKIE['accessToken'])?>'
+                        'Authorization': 'Bearer <?php echo($_COOKIE['accessToken'])?>'
                     },
                     method: 'post',
                     body: payload,
@@ -463,7 +466,7 @@
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
-                        'Authorization': 'Bearer  <?php echo($_COOKIE['accessToken'])?>'
+                        'Authorization': 'Bearer <?php echo($_COOKIE['accessToken'])?>'
                     },
                     method: 'get',
                 })
@@ -508,7 +511,7 @@
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
-                        'Authorization': 'Bearer  <?php echo($_COOKIE['accessToken'])?>'
+                        'Authorization': 'Bearer <?php echo($_COOKIE['accessToken'])?>'
                     },
                     method: 'post',
                     body: payload,
@@ -524,7 +527,7 @@
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
-                        'Authorization': 'Bearer  <?php echo($_COOKIE['accessToken'])?>'
+                        'Authorization': 'Bearer <?php echo($_COOKIE['accessToken'])?>'
                     },
                     method: 'get',
                 })
