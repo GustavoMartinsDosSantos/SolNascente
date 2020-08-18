@@ -164,10 +164,6 @@
                         <div id="outterFormDiv">
                             <form method="post" onsubmit="return false">
                                 <div class="modalInputDiv">
-                                    <label>Insira o seu CPF</label>
-                                    <input type="text" placeholder="CPF" id="partyRoomCpf">
-                                </div>
-                                <div class="modalInputDiv">
                                     <label>Insira o horário de início</label>
                                     <input type="text" placeholder="ex. 12:30" id="partyRoomStart">
                                 </div>
@@ -436,12 +432,10 @@
                 let date = new Date(Date.now()).toISOString()
                 date = date.split('T')
                 
-                cpf = document.getElementById('partyRoomCpf').value
                 start = date[0] + ' ' + document.getElementById('partyRoomStart').value + ':00'
                 end = date[0] + ' ' + document.getElementById('partyRoomEnd').value + ':00'
                 
                 const payload = JSON.stringify({
-                    cpf: cpf,
                     startReservation: start,
                     endReservation: end,
                 })
