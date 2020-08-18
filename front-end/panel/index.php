@@ -249,7 +249,7 @@
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
-                        'Authorization': 'Bearer  <?php echo($_COOKIE['accessToken'])?>'
+                        'Authorization': 'Bearer <?php echo($_COOKIE['accessToken'])?>'
                     },
                     method: 'get',
                 })
