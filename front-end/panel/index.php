@@ -246,7 +246,7 @@
             
             async function GetChangeUser(){
 
-               let response = await fetch('http://18.222.162.205:3000/user/list', {
+               let response = await fetch('http://3.130.166.98:3000/user/list', {
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
@@ -292,7 +292,7 @@
                     cpf:userCpf,
                 })
 				
-               let response = await fetch('http://18.222.162.205:3000/user/delete', {
+               let response = await fetch('http://3.130.166.98:3000/user/delete', {
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
@@ -316,10 +316,10 @@
                 let profile = document.getElementById('changeUserProfile').value
                 
                 if(profile == 'zelador' || profile == 'porteiro'){
-                    var url = 'http://18.222.162.205:3000/employee'
+                    var url = 'http://3.130.166.98:3000/employee'
                     var numSal = 1500.00;
                 }else{
-                    var url = 'http://18.222.162.205:3000/resident'
+                    var url = 'http://3.130.166.98:3000/resident'
                 }
 
                 let payload = { cpf }
@@ -376,7 +376,7 @@
                     })
                 }          
                 
-               let response = await fetch('http://18.222.162.205:3000/lost-and-found/create', {
+               let response = await fetch('http://3.130.166.98:3000/lost-and-found/create', {
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
@@ -397,7 +397,7 @@
 
             async function GetLostAndFound(){
 
-               let response = await fetch('http://18.222.162.205:3000/lost-and-found/list', {
+               let response = await fetch('http://3.130.166.98:3000/lost-and-found/list', {
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
@@ -440,7 +440,7 @@
                     endReservation: end,
                 })
 
-               let response = await fetch('http://18.222.162.205:3000/salon/', {
+               let response = await fetch('http://3.130.166.98:3000/salon/', {
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
@@ -456,7 +456,7 @@
             GetPartyRoom()
             async function GetPartyRoom(){
 
-               let response = await fetch('http://18.222.162.205:3000/salon/list', {
+               let response = await fetch('http://3.130.166.98:3000/salon/list', {
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
@@ -501,7 +501,7 @@
                     description,
                 })
 
-               let response = await fetch('http://18.222.162.205:3000/occurrence/', {
+               let response = await fetch('http://3.130.166.98:3000/occurrence/', {
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
@@ -517,7 +517,7 @@
             GetRegisterTicket()
              async function GetRegisterTicket(){
 
-               let response = await fetch('http://18.222.162.205:3000/occurrence/list', {
+               let response = await fetch('http://3.130.166.98:3000/occurrence/list', {
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',

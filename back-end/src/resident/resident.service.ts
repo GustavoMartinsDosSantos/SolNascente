@@ -11,7 +11,9 @@ export class ResidentService {
     arg: string | number,
     columns?: string[],
   ): Promise<DeepPartial<ResidentDto> | boolean> {
-    let result = (await getConnection()
+    if (columns.length) columns.push('profile');
+
+    const result = (await getConnection()
       .query(
         `SELECT ${columns || columns.length ? columns.join(',') : '*'} FROM residents WHERE ${
           typeof arg === 'string' ? `cpf = "${arg}"` : `id = ${arg}`
@@ -27,8 +29,6 @@ export class ResidentService {
     if (result[0].profile) {
       result[0].profile = residentEnum[result[0].profile];
     }
-
-    result = JSON.parse(JSON.stringify(result));
 
     return result[0];
   }

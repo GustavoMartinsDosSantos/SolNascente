@@ -17,11 +17,9 @@ export class LostAndFoundController {
   public async create(
     @Body() args: CreateOrUpdateLostAndFoundDto,
   ): Promise<LostAndFoundDto | InternalServerErrorException> {
-    const item = await this.lostAndFoundService.create(args);
+    const item = await this.lostAndFoundService.createOrUpdate(args);
 
-    if (typeof item === 'boolean') {
-      throw new InternalServerErrorException();
-    }
+    if (typeof item === 'boolean') throw new InternalServerErrorException();
 
     return item;
   }

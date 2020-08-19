@@ -31,8 +31,6 @@ export class AuthService {
 
       if (typeof user[0] === 'boolean') return null;
 
-      user[0] = JSON.parse(JSON.stringify(user[0]));
-
       const { password: passwordHash, ...result } = user[0];
 
       if (await bcrypt.compare(password, passwordHash)) return result;

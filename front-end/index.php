@@ -32,7 +32,7 @@ session_start();
 
 				const payload = JSON.stringify({ cpf, password })
 
-				let response= await fetch('http://18.222.162.205:3000/auth', {
+				let response= await fetch('http://3.130.166.98:3000/auth', {
 				headers: {
 					'Accept': 'application/json',
 					'Content-Type': 'application/json'
@@ -46,8 +46,8 @@ session_start();
 					document.cookie = "id =" + response.id
 					document.cookie = "accessToken =" + response.token
 					document.cookie = "permission =" + response.profile;
-					//window.location = 'http://18.222.162.205/panel'
-					window.location = 'http://18.222.162.205/panel'
+					//window.location = 'http://3.130.166.98/panel'
+					window.location = 'http://3.130.166.98/panel'
 				}else{
 					alert("Senha ou CPF inválidos")
 				}

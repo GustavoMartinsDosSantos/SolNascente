@@ -14,12 +14,8 @@ export class LostAndFoundService {
 
   constructor(private readonly residentService: ResidentService) {}
 
-  public async create(data: CreateOrUpdateLostAndFoundDto): Promise<LostAndFoundDto | boolean> {
-    const { cpf, description, local } = data;
-
-    const idInputPerson = await this.residentService.findByCpfOrId(cpf, ['id']);
-
-    if (data?.id) {
+  public async createOrUpdate(data: CreateOrUpdateLostAndFoundDto): Promise<LostAndFoundDto | boolean> {
+    if (data.id) {
       let item = await this.findById(data.id);
 
       if (typeof item === 'boolean') return item;
@@ -29,6 +25,10 @@ export class LostAndFoundService {
       return item;
     }
 
+    const { cpf, description, local } = data;
+
+    const idInputPerson = await this.residentService.findByCpfOrId(cpf, ['id']);
+
     if (typeof idInputPerson !== 'boolean') {
       const result = await getConnection()
         .query(
@@ -37,7 +37,7 @@ export class LostAndFoundService {
         .catch((error) => {
           this.logger.error(error);
           return false;
-        });
+        }) as any | boolean;
 
       if (typeof result === 'boolean') return result;
 
@@ -48,7 +48,7 @@ export class LostAndFoundService {
         .catch((error) => {
           this.logger.error(error);
           return false;
-        })) as LostAndFoundDto[];
+        })) as LostAndFoundDto[] | boolean;
 
       if (typeof item === 'boolean') return result;
 
@@ -69,7 +69,7 @@ export class LostAndFoundService {
         .catch((error) => {
           this.logger.error(error);
           return false;
-        });
+        }) as any | boolean;
 
       if (typeof result === 'boolean') return result;
 
@@ -78,7 +78,7 @@ export class LostAndFoundService {
         .catch((error) => {
           this.logger.error(error);
           return false;
-        })) as LostAndFoundDto[];
+        })) as LostAndFoundDto[] | boolean;
 
       if (typeof item === 'boolean') return result;
 
@@ -89,12 +89,12 @@ export class LostAndFoundService {
   }
 
   public async findById(id: number): Promise<LostAndFoundDto | boolean> {
-    const item = (await getConnection()
+    let item = (await getConnection()
       .query(`SELECT * FROM lost_and_found WHERE id = ${id}`)
       .catch((error) => {
         this.logger.error(error);
         return false;
-      })) as LostAndFoundDto[];
+      })) as LostAndFoundDto[] | boolean;
 
     if (typeof item === 'boolean') return item;
 
