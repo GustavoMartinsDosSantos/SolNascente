@@ -4,8 +4,8 @@ Trabalho realizado para a matéria de Banco de Dados I
 O problema proposto é criar um sistema de gerenciamento de banco de dados com algumas funcionalidades básicas, simulando um sistema real.
 
 Gustavo Martins dos Santos - HTML / CSS / JS / PHP / SQL<br>
-Lucas S. Beiler - PHP / PDO / SQL<br>
 Gustavo Constantini Mattos - Node.js / Nest / SQL<br>
+Lucas S. Beiler - PHP / Lumen / SQL (uma API secundária, alternativa, simplesmente uma outra implementação da API principal.)<br>
 
 ## Codigo sql para criar o schema e as tabelas
 ## OBS: copiar do arquivo db.sql em back-end/db.sql para evitar erros
